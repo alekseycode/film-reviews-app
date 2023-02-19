@@ -6,8 +6,13 @@ const {
 const {
     getFilms
 } = require('../contollers/filmController');
+const {
+    getReviews
+} = require('../contollers/reviewController');
+
 
 router.get('/users', getUsers);
 router.get('/films', getFilms);
+router.get('/reviews', getReviews);
 
 module.exports = router;
