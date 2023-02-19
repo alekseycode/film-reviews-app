@@ -1,6 +1,6 @@
 const db = require('../db/weviewsDB');
 
-const getUsers = async (req, res) => {
+exports.getUsers = async (req, res) => {
   try {
     await db.select('*').from('users')
     .then(rows => {
@@ -12,10 +12,6 @@ const getUsers = async (req, res) => {
   } catch(e) {
     console.log(e)
   }
- 
-
 }
 
-module.exports = {
-  getUsers
-}
+
