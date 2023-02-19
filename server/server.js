@@ -7,9 +7,10 @@ app.get('/', (req, res) => {
     res.json({payload: "Sup baud"})
 })
 
-const userRouter = require('./routers/userRouter');
+const dbRouter = require('./routers/dbRouter');
 
-app.use('/api', userRouter)
+app.use('/api', dbRouter)
+
 
 const PORT = process.env.API_PORT;
 
