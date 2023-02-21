@@ -1,0 +1,17 @@
+@import 'variables.css';
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--background-color);
+    padding-bottom: 20px;
+}
+
+nav a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.active {
+    color: var(--link-color-active);
+}

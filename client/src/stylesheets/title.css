@@ -1,0 +1,9 @@
+@import 'variables.css';
+
+.title {
+    padding: 40px;
+    font-size: 30px;
+    text-align: center;
+    color: var(--title-color);
+    background-color: var(--background-color);
+}
