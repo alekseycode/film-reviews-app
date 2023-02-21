@@ -1,7 +1,14 @@
 const express = require('express')
 const app = express();
-require('dotenv').config()
+require('dotenv').config();
 
+const cors = require('cors')
+const corsOptions = {
+    origin: "*",
+    optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
     res.json({payload: "Sup baud"})
