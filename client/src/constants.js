@@ -1,0 +1,1 @@
+export const API_URL = process.env.WEVIEWS_SERVER_URL;
