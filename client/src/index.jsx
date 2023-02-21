@@ -5,12 +5,19 @@ import {
   RouterProvider
 } from "react-router-dom"
 import './index.css';
+import { FilmsLayout } from './layouts/FilmsLayout';
 import RootLayout from './layouts/RootLayout';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout/>
+    element: <RootLayout />,
+    children: [
+      {
+        path: "films",
+        element: <FilmsLayout/>
+      }
+    ]
   }
 ])
 

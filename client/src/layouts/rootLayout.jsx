@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { Navigation } from "../components/Navigation";
 import { Title } from "../components/Title";
 import '../stylesheets/rootLayout.css'
@@ -10,10 +11,7 @@ const rootLayout = () => {
            <Navigation/>
            </header>
            <main>
-               <p>Film1</p>
-               <p>Film2</p>
-               <p>Film3</p>
-               <p>Film4</p>
+              <Outlet/>
            </main>
        </div>
     );
