@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from 'axios'
-// import { API_URL } from "../constants";
+import { API_URL } from "../constants.jsx";
 
 export const FilmsLayout = () => {
     const [filmsData, setFilmsData] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/films`)
+        axios.get(`${API_URL}/films`)
             .then(async res => setFilmsData(res.data.payload))
             .catch(e => console.log(e))
 }, []);
