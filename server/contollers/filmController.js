@@ -11,3 +11,15 @@ exports.getFilms = async (req, res) => {
         console.log(e);
     }
 }
+
+exports.getFilmById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const row = await db.select('*').from('films').where({id:id})
+       
+        res.json({message: 'films', payload: row})
+       
+    } catch (e) {
+        console.log(e);        
+    }
+}

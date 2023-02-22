@@ -4,7 +4,7 @@ const {
     getUsers
 } = require('../contollers/userController');
 const {
-    getFilms
+    getFilms, getFilmById
 } = require('../contollers/filmController');
 const {
     getReviews
@@ -12,7 +12,12 @@ const {
 
 
 router.get('/users', getUsers);
+
+
 router.get('/films', getFilms);
+router.get('/films/:id', getFilmById);
+
+
 router.get('/reviews', getReviews);
 
 module.exports = router;
