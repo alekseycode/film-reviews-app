@@ -1,1 +1,1 @@
-export const API_URL = process.env.WEVIEWS_SERVER_URL;
+export const API_URL = process.env.REACT_APP_WEVIEWS_SERVER_URL;
