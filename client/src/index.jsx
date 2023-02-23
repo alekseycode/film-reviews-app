@@ -7,6 +7,7 @@ import {
 import './index.css';
 import { FilmsLayout } from './layouts/FilmsLayout';
 import RootLayout from './layouts/RootLayout';
+import FilmDetails, { filmDetailsLoader } from './pages/FilmDetails';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "films",
-        element: <FilmsLayout/>
+        element: <FilmsLayout />,
+      },
+      {
+         path: 'films/:id',
+         element: <FilmDetails />,
+         loader: filmDetailsLoader       
       }
     ]
   }

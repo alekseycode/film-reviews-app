@@ -17,7 +17,7 @@ exports.getFilmById = async (req, res) => {
         const { id } = req.params;
         const row = await db.select('*').from('films').where({id:id})
        
-        res.json({message: 'films', payload: row})
+        res.json({message: 'film', payload: row})
        
     } catch (e) {
         console.log(e);        
