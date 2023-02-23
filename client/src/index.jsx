@@ -8,6 +8,7 @@ import './index.css';
 import { FilmsLayout } from './layouts/FilmsLayout';
 import RootLayout from './layouts/RootLayout';
 import FilmDetails, { filmDetailsLoader } from './pages/FilmDetails';
+import { Home } from './pages/Home';
 
 const router = createBrowserRouter([
   {
@@ -15,13 +16,17 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
+        path: '/',
+        element: <Home/>
+      },
+      {
         path: "films",
         element: <FilmsLayout />,
       },
       {
-         path: 'films/:id',
-         element: <FilmDetails />,
-         loader: filmDetailsLoader       
+        path: 'films/:id',
+        element: <FilmDetails />,
+        loader: filmDetailsLoader       
       }
     ]
   }
