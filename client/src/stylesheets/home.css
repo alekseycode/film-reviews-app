@@ -1,0 +1,93 @@
+.featured-content-heading {
+    text-align: center;
+    font-family: "Titillium Web", sans-serif;
+  }
+  
+  .grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(1fr);
+    margin: 5% 10%;
+  }
+  
+  .latest-reviews-section h2 {
+    text-align: center;
+  }
+  
+  .featured-content {
+    margin-bottom: 4rem;
+    /* border: 1px solid black; */
+    padding: 5% 0;
+  }
+  
+  .featured-content h2 {
+    font-family: "Anton", sans-serif;
+  }
+  
+  .featured-content p {
+    margin: 3rem 3rem 1.5rem;
+    font-family: "Titillium Web", sans-serif;
+    line-height: 2rem;
+    text-align: center;
+  }
+  
+  .featured-content a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .featured-content a:hover,
+  .featured-content a:focus {
+    text-decoration-line: underline;
+  }
+  
+  .image-container {
+    width: 60%;
+    aspect-ratio: 27/40;
+    background-size: cover;
+    box-shadow: 10px 10px 10px rgb(73, 71, 71);
+  }
+  
+  .black-adam {
+    background-image: url(../../public/images/black-adam.jpg);
+  }
+  
+  .black-widow {
+    background-image: url(../../public/images/black-widow2.jpg);
+  }
+  
+  .man-of-steel {
+    background-image: url(../../public/images/man-of-steel-cool-poster-1.jpg);
+  }
+  
+  .captain-america {
+    background-image: url(../../public/images/captain-america.jpg);
+    background-position: center center;
+  }
+  
+  .image-container {
+    margin: 2rem auto;
+  }
+
+  
+@media (min-width: 501px) {
+    .grid-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .featured-content-heading {
+      margin-top: 8rem;
+      margin-bottom: 6rem;
+    }
+  
+    .featured-content {
+      margin-bottom: 8rem;
+    }
+  
+    .featured-content p {
+      margin-top: 80px;
+    }
+  
+  }
+  
