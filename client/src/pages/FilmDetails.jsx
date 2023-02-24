@@ -6,14 +6,14 @@ import axios from 'axios';
 const FilmDetails = () => {
 
     const { filmPayload, reviewsPayload } = useLoaderData();
-    console.log(reviewsPayload)
+
   return (
       <div className="film-details">
           <h1>{filmPayload.payload[0].title}</h1>  
           
           {reviewsPayload.payload.map((review) => (
             <div className="review" key={review.id}>
-               {review.username}: {review.review }
+               <span className='username'>{review.username}:</span> ’{review.review}’
               </div>
         ))}
      </div>

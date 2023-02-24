@@ -2,3 +2,11 @@ h1 {
     text-align: center;
 }
 
+.review {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.username {
+    margin-right: 10px;
+}
