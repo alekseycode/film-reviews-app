@@ -3,25 +3,40 @@ import { API_URL } from "../constants";
 
 const FilmDetails = () => {
 
-    const film = useLoaderData();
-    console.log(film)
+    const { filmPayload, reviewsPayload } = useLoaderData();
+    
   return (
       <div className="film-details">
-          <p>{film.payload[0].title}</p>   
+          <h1>{filmPayload.payload[0].title}</h1>  
+          <ul>
+        {reviewsPayload.payload.map((review) => (
+          <li key={review.id}>{review.review}</li>
+        ))}
+      </ul>
      </div>
   );
 }
 
-export const filmDetailsLoader = async ({ params }) => {
+
+export const filmDetailsAndReviewsLoader = async ({ params }) => {
     const { id } = params;
-
-    const res = await fetch(`${API_URL}/films/` + id)
-
-    if (!res.ok) {
-        throw Error('Could not find that film')
+  
+    const filmPromise = fetch(`${API_URL}/films/${id}`);
+    const reviewsPromise = fetch(`${API_URL}/reviews/${id}`);
+  
+    const [filmRes, reviewsRes] = await Promise.all([filmPromise, reviewsPromise]);
+  
+    if (!filmRes.ok || !reviewsRes.ok) {
+      throw Error('Could not load film details and reviews');
     }
-
-    return res;
+  
+    const filmPayload = await filmRes.json();
+    const reviewsPayload = await reviewsRes.json();
+  
+    return {
+      filmPayload,
+      reviewsPayload,
+    };
 }
-
+  
 export default FilmDetails;

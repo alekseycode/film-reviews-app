@@ -7,7 +7,7 @@ import {
 import './index.css';
 import { FilmsLayout } from './layouts/FilmsLayout';
 import RootLayout from './layouts/RootLayout';
-import FilmDetails, { filmDetailsLoader } from './pages/FilmDetails';
+import FilmDetails, {filmDetailsAndReviewsLoader} from './pages/FilmDetails';
 import { Home } from './pages/Home';
 
 const router = createBrowserRouter([
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: 'films/:id',
         element: <FilmDetails />,
-        loader: filmDetailsLoader       
+        loader: filmDetailsAndReviewsLoader    
       }
     ]
   }
