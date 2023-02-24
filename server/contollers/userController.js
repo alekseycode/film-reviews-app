@@ -12,4 +12,15 @@ exports.getUsers = async (req, res) => {
   }
 }
 
+exports.getUsersById = async (req, res) => {
+  try {
+    const { id } = req.params;
+   const user = await db.select('*').from('users').where({ id: id })
+    
+    res.json(user)
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 

@@ -1,5 +1,6 @@
 const db = require('../db/weviewsDB');
 
+
 exports.getFilms = async (req, res) => {
     try {
         await db.select('*').from('films')
@@ -23,3 +24,4 @@ exports.getFilmById = async (req, res) => {
         console.log(e);        
     }
 }
+
