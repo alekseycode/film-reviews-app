@@ -6,14 +6,14 @@ import axios from 'axios';
 const FilmDetails = () => {
 
     const { filmPayload, reviewsPayload } = useLoaderData();
-    
+    console.log(reviewsPayload)
   return (
       <div className="film-details">
           <h1>{filmPayload.payload[0].title}</h1>  
           
           {reviewsPayload.payload.map((review) => (
             <div className="review" key={review.id}>
-              User_id {review.user_id}: {review.review }
+               {review.username}: {review.review }
               </div>
         ))}
      </div>
@@ -26,7 +26,7 @@ export const filmDetailsAndReviewsLoader = async ({ params }) => {
   
     const [filmRes, reviewsRes] = await axios.all([
         axios.get(`${API_URL}/films/${id}`),
-        axios.get(`${API_URL}/reviews/${id}`)
+        axios.get(`${API_URL}/usersReviews/${id}`)
       ]);
   
     if (filmRes.status !== 200 || reviewsRes.status !== 200) {

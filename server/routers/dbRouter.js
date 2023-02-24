@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
-    getUsers, getUsersById
+    getUsers, getUsersById, getUsersReviews, getUsersReviewsByFilmId
 } = require('../contollers/userController');
 const {
     getFilms, getFilmById
@@ -13,6 +13,7 @@ const {
 
 router.get('/users', getUsers);
 router.get('/users/:id', getUsersById);
+router.get('/usersReviews/:id', getUsersReviewsByFilmId);
 
 router.get('/films', getFilms);
 router.get('/films/:id', getFilmById);
