@@ -1,5 +1,7 @@
+import '../stylesheets/filmDetails.css'
 import { useLoaderData } from "react-router-dom";
 import { API_URL } from "../constants";
+import axios from 'axios';
 
 const FilmDetails = () => {
 
@@ -8,11 +10,12 @@ const FilmDetails = () => {
   return (
       <div className="film-details">
           <h1>{filmPayload.payload[0].title}</h1>  
-          <ul>
-        {reviewsPayload.payload.map((review) => (
-          <li key={review.id}>{review.review}</li>
+          
+          {reviewsPayload.payload.map((review) => (
+            <div className="review" key={review.id}>
+               {review.review }
+              </div>
         ))}
-      </ul>
      </div>
   );
 }
@@ -21,22 +24,19 @@ const FilmDetails = () => {
 export const filmDetailsAndReviewsLoader = async ({ params }) => {
     const { id } = params;
   
-    const filmPromise = fetch(`${API_URL}/films/${id}`);
-    const reviewsPromise = fetch(`${API_URL}/reviews/${id}`);
+    const [filmRes, reviewsRes] = await axios.all([
+        axios.get(`${API_URL}/films/${id}`),
+        axios.get(`${API_URL}/reviews/${id}`)
+      ]);
   
-    const [filmRes, reviewsRes] = await Promise.all([filmPromise, reviewsPromise]);
-  
-    if (!filmRes.ok || !reviewsRes.ok) {
-      throw Error('Could not load film details and reviews');
+    if (filmRes.status !== 200 || reviewsRes.status !== 200) {
+      throw new Error('Could not load film details and reviews');
     }
   
-    const filmPayload = await filmRes.json();
-    const reviewsPayload = await reviewsRes.json();
-  
     return {
-      filmPayload,
-      reviewsPayload,
+      filmPayload: filmRes.data,
+      reviewsPayload: reviewsRes.data,
     };
-}
+  };
   
 export default FilmDetails;
