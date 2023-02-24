@@ -10,3 +10,14 @@ exports.getReviews = async (req, res) => {
         console.log(e);
     }
 }
+
+exports.getReviewsByFilmId = async (req, res) => {
+    try {
+        const { id } = req.params;
+       const rows = await db.select('*').from('reviews').where({ film_id: id })
+        
+        res.json({message: 'reviews', payload: rows})
+    } catch (e) {
+        console.log(e);    
+    }
+}

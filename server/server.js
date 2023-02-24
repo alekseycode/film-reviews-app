@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.json({payload: "Sup baud"})
+    res.json({payload: "Sup baud, welcome to the server side"})
 })
 
 const dbRouter = require('./routers/dbRouter');

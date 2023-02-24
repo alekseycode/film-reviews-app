@@ -7,7 +7,7 @@ const {
     getFilms, getFilmById
 } = require('../contollers/filmController');
 const {
-    getReviews
+    getReviews, getReviewsByFilmId
 } = require('../contollers/reviewController');
 
 
@@ -19,5 +19,6 @@ router.get('/films/:id', getFilmById);
 
 
 router.get('/reviews', getReviews);
+router.get('/reviews/:id', getReviewsByFilmId);
 
 module.exports = router;
