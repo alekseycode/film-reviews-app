@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../stylesheets/home.css'
 
 export const Home = () => {
@@ -14,7 +15,7 @@ export const Home = () => {
             <p>
                 It’s distinguished itself just enough to satiate action film fans, entertain future streaming audiences and warrant further merging into the DC universe. 
             </p>
-            <a href="/">Read More</a>
+            <Link to="/films/1">Read More</Link>
           </div>
 
           <div className="featured-content">
@@ -24,7 +25,7 @@ export const Home = () => {
             <p>             
               The mostly self-contained story packs a surprising amount of heart and finally gives this long-running MCU character a proper send off. 
             </p>
-            <a href="/">Read More</a>
+            <Link to="/films/2">Read More</Link>
           </div>
 
           <div className="featured-content">
@@ -33,7 +34,7 @@ export const Home = () => {
             <p>
               Zack Snyder's Man of Steel is a gritty and realistic take on one of the most iconic superheroes ever. It's visually astonishing and action-packed.
             </p>
-            <a href="/">Read More</a>
+            <Link to="/films/4">Read More</Link>
           </div>
           
           <div className="featured-content">
@@ -42,7 +43,7 @@ export const Home = () => {
             <p>
               A whizz-bang, retro-futuristic adventure offers an exhilarating thrill ride that perfectly captures the enduring optimism of the 1940s.  
             </p>
-            <a href="/">Read More</a>
+            <Link to="/films/5">Read More</Link>
           </div>
         </div>
         </section>
