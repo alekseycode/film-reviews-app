@@ -18,8 +18,10 @@ app.get('/', (req, res) => {
 })
 
 const dbRouter = require('./routers/dbRouter');
+app.use('/api', dbRouter);
 
-app.use('/api', dbRouter)
+const authRouter = require('./routers/authRouter');
+app.use('/auth', authRouter);
 
 
 const PORT = process.env.API_PORT;
