@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import { API_URL } from "../constants.jsx";
 import {Link} from "react-router-dom"
+import '../stylesheets/filmsLayout.css'
 
 export const FilmsLayout = () => {
     const [filmsData, setFilmsData] = useState([]);
@@ -16,7 +17,7 @@ export const FilmsLayout = () => {
       <div className="films">
           {filmsData && filmsData.map((film, i) => (
               <Link to={film.id.toString()} className="film" key={i}>
-                  <p>{film.title}</p>
+                  <h3>{film.title}</h3>
             </Link>
           ))}
       </div>
