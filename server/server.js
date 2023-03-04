@@ -23,7 +23,7 @@ app.use(sessions({
     secret: process.env.COOKIE_SECRET,
     saveUninitialized: false,
     resave: false, 
-    cookie: {maxAge: 86400}
+    cookie: {maxAge: 6000}
 }))
 
 app.get('/', (req, res) => {
