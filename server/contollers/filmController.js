@@ -1,7 +1,8 @@
-const db = require('../db/weviewsDB');
+const connectToDB = require('../db/weviewsDB');
 
 
 exports.getFilms = async (req, res) => {
+    const db = await connectToDB();
     try {
         await db.select('*').from('films')
         .then(rows => {
@@ -10,10 +11,14 @@ exports.getFilms = async (req, res) => {
        
     } catch (e) {
         console.log(e);
-    }
+    } finally {
+        db.destroy();
+        console.log('Connection destroyed');
+      }
 }
 
 exports.getFilmById = async (req, res) => {
+    const db = await connectToDB();
     try {
         const { id } = req.params;
         const row = await db.select('*').from('films').where({id:id})
@@ -22,6 +27,9 @@ exports.getFilmById = async (req, res) => {
        
     } catch (e) {
         console.log(e);        
-    }
+    } finally {
+        db.destroy();
+        console.log('Connection destroyed');
+      }
 }
 
