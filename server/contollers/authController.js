@@ -77,6 +77,17 @@ exports.postRegister = async (req, res) => {
     }
 }
 
-exports.forgotPassword = await async(req, res) => {
+
+exports.forgotPassword = async (req, res) => {
+    const { email } = req.body;
+
+    const user = await db('users')
+        .where('email', email)
+        .first()
     
+    if (!user) {
+        res.status(400).json({error: 'Invalid email address'})
+    }
+
+    res.json({ success: success });
 }
