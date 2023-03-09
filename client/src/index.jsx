@@ -6,10 +6,11 @@ import {
 } from "react-router-dom"
 import './index.css';
 import { FilmsLayout } from './layouts/FilmsLayout';
-import { LoginLayout } from './layouts/LoginLayout';
+import LoginLayout, {loginAction} from './layouts/LoginLayout';
 import RootLayout from './layouts/RootLayout';
 import FilmDetails, {filmDetailsAndReviewsLoader} from './pages/FilmDetails';
 import { Home } from './pages/Home';
+import { CookiesProvider } from "react-cookie";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <LoginLayout />,
+        action: loginAction
       }
     ]
   }
@@ -41,7 +43,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <CookiesProvider>
+      <RouterProvider router={router} />
+    </CookiesProvider> 
   </React.StrictMode>
 );
 

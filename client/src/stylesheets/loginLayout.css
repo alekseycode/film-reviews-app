@@ -1,5 +1,6 @@
 .wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 50vh;
@@ -53,4 +54,8 @@ button {
 
 button:hover {
   background-color: #4aa56d;
+}
+
+.error {
+  color: red;
 }

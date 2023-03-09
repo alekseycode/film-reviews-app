@@ -25,8 +25,8 @@ export const filmDetailsAndReviewsLoader = async ({ params }) => {
     const { id } = params;
   
     const [filmRes, reviewsRes] = await axios.all([
-        axios.get(`${API_URL}/films/${id}`),
-        axios.get(`${API_URL}/usersReviews/${id}`)
+        axios.get(`${API_URL}/api/films/${id}`),
+        axios.get(`${API_URL}/api/usersReviews/${id}`)
       ]);
   
     if (filmRes.status !== 200 || reviewsRes.status !== 200) {

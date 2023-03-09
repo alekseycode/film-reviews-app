@@ -8,7 +8,7 @@ export const FilmsLayout = () => {
     const [filmsData, setFilmsData] = useState([]);
 
     useEffect(() => {
-        axios.get(`${API_URL}/films`)
+        axios.get(`${API_URL}/api/films`)
             .then(async res => setFilmsData(res.data.payload))
             .catch(e => console.log(e))
 }, []);

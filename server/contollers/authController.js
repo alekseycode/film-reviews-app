@@ -2,11 +2,12 @@ const connectToDB = require('../db/weviewsDB');
 const bcrypt = require('bcrypt');
 
 exports.postLogin = async (req, res) => {
-    const { username, password } = req.body;
+     const { username, password } = req.body;
      const db = await connectToDB();
     try {
+        //check if fields are empty
         if (!username?.length || !password?.length) {
-            return res.status(401).json({ error: 'Username or password cannot be empty'})
+            return res.json({ error: 'Username or password cannot be empty'})
         }
     
         const user = await db('users')
@@ -14,23 +15,28 @@ exports.postLogin = async (req, res) => {
             .select('username', 'password')
             .first();
         
-        const isPasswordMatch = await bcrypt.compare(password, user.password)
+         if (!user) {
+         return res.json({error: 'Incorrect username or password.'});
+        } 
+        
+        // check if user is already logged in
+        if (req.session.user) {
+               return res.json({error: 'User is already logged in'});
+            }
+               
+         const isPasswordMatch = await bcrypt.compare(password, user.password)
     
         if (!isPasswordMatch) {
-            return res.status(401).json({error: 'Incorrect username or password'})
-        }
-    
-        if (!user) {
-         return res.status(401).send('Incorrect username or password.');
-        } else {
-            if (req.session.user) {
-                // user is already logged in
-                res.status(401).json({error: 'User is already logged in'});
-            } else {
-                req.session.user = { username: req.username, password: req.password }
-                res.json({ message: `Welcome, ${req.body.username}!`})
-              }
-        }
+            return res.json({error: 'Incorrect username or password'})
+        }     
+        
+        //give the user a session 
+        req.session.user = { username, password }
+        res.cookie('sessionID', req.sessionID, { httpOnly: true });
+        return res.json({ message: `Welcome, ${req.body.username}!` })
+        
+        
+        
     } catch (e) {
         console.log(e);  
     } finally {
@@ -63,7 +69,7 @@ exports.postRegister = async (req, res) => {
     const db = await connectToDB();
     try {
         if (!user?.username?.length || !user?.password?.length || !user?.email?.length) {
-            return res.status(401).json({ error: 'Username, password or email fields cannot be empty'})
+            return res.json({ error: 'Username, password or email fields cannot be empty'})
          }
      
      
@@ -73,7 +79,7 @@ exports.postRegister = async (req, res) => {
              .first();
      
          if (isExistingUser) {
-             return res.status(401).json({ error: 'User already exists' })
+             return res.json({ error: 'User already exists' })
          }
      
          const saltRounds = 10;
@@ -107,7 +113,7 @@ exports.forgotPassword = async (req, res) => {
         .first()
     
     if (!user) {
-        res.status(400).json({error: 'Invalid email address'})
+        res.json({error: 'Invalid email address'})
     }
 
     res.json({ success: 'success' });
@@ -137,4 +143,9 @@ exports.newPassword = async (req, res) => {
         db.destroy();
         console.log('Connection destroyed');
       }
+}
+
+exports.getSession = async (req, res) => {
+    console.log('getSession: ', req.session);
+    return res.send(req.session)
 }

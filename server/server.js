@@ -1,11 +1,11 @@
 const express = require('express')
 const app = express();
-require('dotenv').config();
 
 const cors = require('cors')
 const corsOptions = {
-    origin: "*",
-    optionSuccessStatus: 200
+    origin: "http://localhost:3000",
+    optionSuccessStatus: 200,
+    credentials: true
 }
 
 app.use(cors(corsOptions));
@@ -23,7 +23,7 @@ app.use(sessions({
     secret: process.env.COOKIE_SECRET,
     saveUninitialized: false,
     resave: false, 
-    cookie: {maxAge: 6000}
+    cookie: { maxAge: 1000 * 60 * 60 }
 }))
 
 app.get('/', (req, res) => {
