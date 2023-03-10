@@ -1,9 +1,9 @@
-const connectToDB = require('../db/weviewsDB');
+const {db} = require('../db/weviewsDB');
 const bcrypt = require('bcrypt');
 
 exports.postLogin = async (req, res) => {
      const { username, password } = req.body;
-     const db = await connectToDB();
+     
     try {
         //check if fields are empty
         if (!username?.length || !password?.length) {
@@ -39,34 +39,28 @@ exports.postLogin = async (req, res) => {
         
     } catch (e) {
         console.log(e);  
-    } finally {
-        db.destroy();
-        console.log('Connection destroyed');
-      }
+    }
 }
 
 exports.logOut = async (req, res) => {
     // destroy the session and redirect the user to the home page
-    const db = await connectToDB();
+  
     try {
         req.session.destroy((err) => {
             if (err) {
-                console.error('Error destroying session:', err);
+               return console.error('Error destroying session:', err);
             } else {
-                res.json({ message: 'Succesfully logged out. Goodbye!' });
+               return res.json({ message: 'Succesfully logged out. Goodbye!' });
             }
         });
     } catch (e) {
         console.log(e);
-    } finally {
-        db.destroy();
-        console.log('Connection destroyed');
-      }
+    } 
 };
   
 exports.postRegister = async (req, res) => {
     const user = req.body;
-    const db = await connectToDB();
+ 
     try {
         if (!user?.username?.length || !user?.password?.length || !user?.email?.length) {
             return res.json({ error: 'Username, password or email fields cannot be empty'})
@@ -93,41 +87,33 @@ exports.postRegister = async (req, res) => {
              .first()
          
          if (insertedUser) {
-             res.json({success: 'Success'})
+            return res.json({success: 'Success'})
          }
     } catch (e) {
         console.log(e); 
-    }  finally {
-        db.destroy();
-        console.log('Connection destroyed');
-      } 
+    } 
 }
-
 
 exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
-    const db = await connectToDB();
+  
     try {
      const user = await db('users')
         .where('email', email)
         .first()
     
     if (!user) {
-        res.json({error: 'Invalid email address'})
+       return res.json({error: 'Invalid email address'})
     }
 
-    res.json({ success: 'success' });
+   return res.json({ success: 'success' });
 } catch (e) {
     console.log(e);   
-}  finally {
-        db.destroy();
-        console.log('Connection destroyed');
-  }
+} 
 }
 
 exports.newPassword = async (req, res) => {
     const { username, password } = req.body;
-    const db = await connectToDB();
     try {
          const saltRounds = 10;
          const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -136,16 +122,13 @@ exports.newPassword = async (req, res) => {
         .where('username', username)
         .update('password', hashedPassword)
     
-    res.json({success: 'Successfully updated password'})
+   return res.json({success: 'Successfully updated password'})
     } catch (e) {
         console.log(e);
-    } finally {
-        db.destroy();
-        console.log('Connection destroyed');
-      }
+    }
 }
 
 exports.getSession = async (req, res) => {
-    console.log('getSession: ', req.session);
-    return res.send(req.session)
+    // console.log('getSession: ', req.session);
+    return res.send(req.session.cookie)
 }
