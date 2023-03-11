@@ -1,51 +1,62 @@
-import '../stylesheets/loginLayout.css'
-import { Link, Form, redirect, useActionData } from 'react-router-dom'
-import {API_URL} from '../constants'
-import axios from 'axios';
+import "../stylesheets/loginLayout.css";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useContext, useState } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function LoginLayout() {
-  const errorData = useActionData();
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ username: "", password: "" });
+  const [error, setError] = useState("");
+  const { username, password } = form;
 
-  return (  
+  const updateForm = (event) =>
+    setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login(form);
+      navigate("/", {
+        replace: true,
+      });
+    } catch (e) {
+      console.log(e);
+      setError(e.response.data.error);
+    }
+  };
+
+  return (
     <div className="wrapper">
-     {errorData && <div className="error">{errorData}</div>} 
-    <Form className="log-in-form" method="post" action="/login">
-      <div className="username-div">
-        <label htmlFor="username">Username</label>
-        <input type="text" name="username" id="username" />
-      </div>
-      <div className="password-div">
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" />
-      </div>
+      {error && <div className="error">{error}</div>}
+      <form className="log-in-form" onSubmit={handleSubmit}>
+        <div className="username-div">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value={username}
+            onChange={updateForm}
+          />
+        </div>
+        <div className="password-div">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={updateForm}
+          />
+        </div>
         <div className="submit-div">
-          <Link to="/passwordReset">Forgot Password</Link> 
-          <Link to="/register">Sign up</Link> 
-        <button type="submit">Log in</button>
-      </div>
-    </Form>
-  </div>
-  
+          <Link to="/passwordReset">Forgot Password</Link>
+          <Link to="/register">Sign up</Link>
+          <button type="submit">Log in</button>
+        </div>
+      </form>
+    </div>
   );
-}
-
-export const loginAction = async ({request}) => {
-
-  const data = await request.formData()
-  
-
-  const submission = {
-    username: data.get('username'),
-    password: data.get('password')
-  }
-
-  const auth = await axios.post(`${API_URL}/auth/login`, submission, {
-    withCredentials: true
-  });
-
-  if (auth.data.error) {
-      return auth.data.error;
-  }
-
-  return redirect('/')
 }

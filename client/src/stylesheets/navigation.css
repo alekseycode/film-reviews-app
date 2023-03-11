@@ -1,17 +1,25 @@
-@import 'variables.css';
+@import "variables.css";
 
 nav {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: var(--background-color);
-    padding-bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--background-color);
+  padding-bottom: 20px;
 }
 
-nav a {
-    color: var(--link-color);
-    text-decoration: none;
+nav a,
+nav p {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 
 .active {
-    color: var(--link-color-active);
+  color: var(--link-color-active);
+}
+
+nav p:hover,
+nav a:hover {
+  color: var(--link-color-active);
 }

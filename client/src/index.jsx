@@ -1,16 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider
-} from "react-router-dom"
-import './index.css';
-import { FilmsLayout } from './layouts/FilmsLayout';
-import LoginLayout, {loginAction} from './layouts/LoginLayout';
-import RootLayout from './layouts/RootLayout';
-import FilmDetails, {filmDetailsAndReviewsLoader} from './pages/FilmDetails';
-import { Home } from './pages/Home';
-import { CookiesProvider } from "react-cookie";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthContextProvider from "./contexts/AuthContext";
+import "./index.css";
+import { FilmsLayout } from "./layouts/FilmsLayout";
+import LoginLayout from "./layouts/LoginLayout";
+import RootLayout from "./layouts/RootLayout";
+import FilmDetails, { filmDetailsAndReviewsLoader } from "./pages/FilmDetails";
+import { Home } from "./pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -18,35 +15,31 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: '/',
-        element: <Home/>
+        path: "/",
+        element: <Home />,
       },
       {
         path: "films",
         element: <FilmsLayout />,
       },
       {
-        path: 'films/:id',
+        path: "films/:id",
         element: <FilmDetails />,
-        loader: filmDetailsAndReviewsLoader    
+        loader: filmDetailsAndReviewsLoader,
       },
       {
-        path: 'login',
+        path: "login",
         element: <LoginLayout />,
-        action: loginAction
-      }
-    ]
-  }
-])
+      },
+    ],
+  },
+]);
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <CookiesProvider>
+    <AuthContextProvider>
       <RouterProvider router={router} />
-    </CookiesProvider> 
+    </AuthContextProvider>
   </React.StrictMode>
 );
-
-

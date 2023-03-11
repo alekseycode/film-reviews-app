@@ -1,26 +1,21 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { API_URL } from "../constants";
-import axios from "axios";
-import '../stylesheets/navigation.css'
-import { useState } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import "../stylesheets/navigation.css";
 
 export const Navigation = () => {
-  const [cookie, setCookie] = useState();
-   
-  async function getCookie() {
-     const session = await axios.get(`${API_URL}/auth/session`)
-     setCookie(session.data)
-     console.log(cookie);
-  }
-
+  const { user, logout } = useContext(AuthContext);
   return (
     <nav>
-    <NavLink to="/" onClick={getCookie}>Home</NavLink>
-    <NavLink to="films" onClick={getCookie}>Films</NavLink>
-    <NavLink to="login" onClick={getCookie}>Log In</NavLink>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="films">Films</NavLink>
+      {user.userId ? (
+        <p to="login" onClick={logout}>
+          Log Out
+        </p>
+      ) : (
+        <NavLink to="login">Log In</NavLink>
+      )}
     </nav>
   );
-}
-
-
-
+};
