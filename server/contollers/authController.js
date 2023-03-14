@@ -32,14 +32,9 @@ exports.postLogin = async (req, res) => {
       expiration,
     });
 
-    console.log("sessionId: " + session.id);
-
     res.cookie("sessionId", session.id, {
       signed: true,
-      maxAge: THIRTY_SECONDS,
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
+      maxAge: THIRTY_SECONDS * 10,
     });
 
     return res.json({ username, id: user.id });
@@ -49,19 +44,17 @@ exports.postLogin = async (req, res) => {
 };
 
 exports.logOut = async (req, res) => {
-  // destroy the session and redirect the user to the home page
+  const sessionId = req.signedCookies.sessionId;
 
-  try {
-    req.session.destroy((err) => {
-      if (err) {
-        return console.error("Error destroying session:", err);
-      } else {
-        return res.json({ message: "Succesfully logged out. Goodbye!" });
-      }
-    });
-  } catch (e) {
-    console.log(e);
+  if (sessionId) {
+    await db("sessions").delete().where({ id: sessionId });
   }
+
+  res
+    .cookie("sessionId", "", {
+      maxAge: 0,
+    })
+    .send("Nom Nom");
 };
 
 exports.postRegister = async (req, res) => {

@@ -19,7 +19,7 @@ const AuthContextProvider = (props) => {
   };
 
   const logout = async () => {
-    await axios.get(`${API_URL}/auth/logout`);
+    await axios.get(`${API_URL}/auth/logout`, { withCredentials: true });
     console.log("User logged out");
     setUser({});
   };
