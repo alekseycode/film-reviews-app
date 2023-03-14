@@ -1,5 +1,6 @@
 const { db } = require("../db/weviewsDB");
 const bcrypt = require("bcrypt");
+const THIRTY_SECONDS = 30000;
 
 exports.postLogin = async (req, res) => {
   const { username, password } = req.body;
@@ -19,16 +20,28 @@ exports.postLogin = async (req, res) => {
       throw new Error("Incorrect username or password.");
     }
 
-    // check if user is already logged in
-    // if (req.session.user) {
-    //   return res.json({ error: "User is already logged in" });
-    // }
-
     await bcrypt.compare(password, user.password);
 
     //give the user a session
-    // req.session.user = { username, password };
-    // res.cookie("sessionID", req.sessionID, { httpOnly: true });
+
+    const utcMilliseconds = new Date().getTime();
+    const expiration = new Date(utcMilliseconds + THIRTY_SECONDS);
+
+    const [session] = await db("sessions").returning("id").insert({
+      user_id: user.id,
+      expiration,
+    });
+
+    console.log("sessionId: " + session.id);
+
+    res.cookie("sessionId", session.id, {
+      signed: true,
+      maxAge: THIRTY_SECONDS,
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
+
     return res.json({ username, id: user.id });
   } catch (e) {
     return res.status(400).json({ error: e.message });
