@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthContextProvider from "./contexts/AuthContext";
 import "./index.css";
 import { FilmsLayout } from "./layouts/FilmsLayout";
-import ForgotPassAuthLayout from "./layouts/forgotPassAuthLayout";
+import ForgotPassAuthLayout from "./layouts/ForgotPassAuthLayout";
 import LoginLayout from "./layouts/LoginLayout";
 import RegisterLayout from "./layouts/RegisterLayout";
 import ResetPassLayout from "./layouts/ResetPassLayout";

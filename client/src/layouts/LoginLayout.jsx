@@ -52,7 +52,7 @@ export default function LoginLayout() {
           />
         </div>
         <div className="submit-div">
-          <Link to="/passwordReset">Forgot Password</Link>
+          <Link to="/forgotPass">Forgot Password</Link>
           <Link to="/register">Sign up</Link>
           <button className="log-in-btn" type="submit">
             Log in
