@@ -110,7 +110,7 @@ exports.forgotPassword = async (req, res) => {
     const user = await db("users").where("email", email).first();
 
     if (!user) {
-      return res.json({ error: "Invalid email address" });
+      throw new Error("Invalid email address");
     }
 
     return res.json({ success: "success" });
