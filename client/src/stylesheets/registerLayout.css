@@ -6,7 +6,7 @@
   height: 50vh;
 }
 
-.log-in-form {
+.register-form {
   width: 400px;
   padding: 20px;
   border: 1px solid #ccc;
@@ -42,8 +42,8 @@ a {
   color: blue;
 }
 
-.log-in-btn {
-  background-color: #5dd861;
+.register-btn {
+  background-color: #64a8f4;
   color: white;
   border: none;
   border-radius: 5px;
@@ -52,8 +52,8 @@ a {
   transition: 0.3s ease;
 }
 
-.log-in-btn:hover {
-  background-color: #4aa56d;
+.register-btn:hover {
+  background-color: #3281c2;
 }
 
 .error {

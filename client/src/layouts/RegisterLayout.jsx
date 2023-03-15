@@ -1,36 +1,24 @@
-import "../stylesheets/loginLayout.css";
-import { Link, useNavigate } from "react-router-dom";
+import "../stylesheets/registerLayout.css";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-import { useContext, useState } from "react";
-import { AuthContext } from "../contexts/AuthContext";
-
-export default function LoginLayout() {
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
+const RegisterLayout = () => {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const { username, password } = form;
 
-  const updateForm = (event) =>
-    setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  const handleSubmit = () => {
+    console.log("handleSubmit");
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await login(form);
-      navigate("/", {
-        replace: true,
-      });
-    } catch (e) {
-      console.log(e);
-      setError(e.response.data.error);
-    }
+  const updateForm = () => {
+    console.log("updateForm");
   };
 
   return (
     <div className="wrapper">
       {error && <div className="error">{error}</div>}
-      <form className="log-in-form" onSubmit={handleSubmit}>
+      <form className="register-form" onSubmit={handleSubmit}>
         <div className="username-div">
           <label htmlFor="username">Username</label>
           <input
@@ -51,14 +39,24 @@ export default function LoginLayout() {
             onChange={updateForm}
           />
         </div>
+        <div className="password-div">
+          <label htmlFor="password">Confirm Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={updateForm}
+          />
+        </div>
         <div className="submit-div">
-          <Link to="/passwordReset">Forgot Password</Link>
-          <Link to="/register">Sign up</Link>
-          <button className="log-in-btn" type="submit">
-            Log in
+          <button className="register-btn" type="submit">
+            Register
           </button>
         </div>
       </form>
     </div>
   );
-}
+};
+
+export default RegisterLayout;

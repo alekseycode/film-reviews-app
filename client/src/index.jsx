@@ -5,6 +5,7 @@ import AuthContextProvider from "./contexts/AuthContext";
 import "./index.css";
 import { FilmsLayout } from "./layouts/FilmsLayout";
 import LoginLayout from "./layouts/LoginLayout";
+import RegisterLayout from "./layouts/RegisterLayout";
 import RootLayout from "./layouts/RootLayout";
 import FilmDetails, { filmDetailsAndReviewsLoader } from "./pages/FilmDetails";
 import { Home } from "./pages/Home";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <LoginLayout />,
+      },
+      {
+        path: "register",
+        element: <RegisterLayout />,
       },
     ],
   },

@@ -92,7 +92,7 @@ exports.postRegister = async (req, res) => {
       return res.json({ success: "Success" });
     }
   } catch (e) {
-    console.log(e);
+    return res.status(400).json({ error: e.message });
   }
 };
 
@@ -108,7 +108,7 @@ exports.forgotPassword = async (req, res) => {
 
     return res.json({ success: "success" });
   } catch (e) {
-    console.log(e);
+    return res.status(400).json({ error: e.message });
   }
 };
 
@@ -124,7 +124,7 @@ exports.newPassword = async (req, res) => {
 
     return res.json({ success: "Successfully updated password" });
   } catch (e) {
-    console.log(e);
+    return res.status(400).json({ error: e.message });
   }
 };
 
