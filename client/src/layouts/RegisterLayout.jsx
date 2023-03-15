@@ -1,22 +1,41 @@
 import "../stylesheets/registerLayout.css";
-import { Link } from "react-router-dom";
+
 import { useState } from "react";
+import axios from "axios";
+import { API_URL } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 const RegisterLayout = () => {
-  const [form, setForm] = useState({ username: "", password: "" });
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [error, setError] = useState("");
-  const { username, password } = form;
+  const { username, password, confirmPassword } = form;
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    console.log("handleSubmit");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(`${API_URL}/auth/register`, form);
+      navigate("/login", {
+        replace: true,
+      });
+    } catch (e) {
+      setError(e.response.data.error);
+      console.log(e);
+    }
+    console.log(form);
   };
 
-  const updateForm = () => {
-    console.log("updateForm");
+  const updateForm = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    console.log(form);
   };
 
   return (
-    <div className="wrapper">
+    <div className="register-wrapper">
       {error && <div className="error">{error}</div>}
       <form className="register-form" onSubmit={handleSubmit}>
         <div className="username-div">
@@ -40,12 +59,12 @@ const RegisterLayout = () => {
           />
         </div>
         <div className="password-div">
-          <label htmlFor="password">Confirm Password</label>
+          <label htmlFor="confirm-password">Confirm Password</label>
           <input
             type="password"
-            name="password"
-            id="password"
-            value={password}
+            name="confirmPassword"
+            id="confirm-password"
+            value={confirmPassword}
             onChange={updateForm}
           />
         </div>

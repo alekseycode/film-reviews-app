@@ -64,11 +64,13 @@ exports.postRegister = async (req, res) => {
     if (
       !user?.username?.length ||
       !user?.password?.length ||
-      !user?.email?.length
+      !user?.confirmPassword?.length
     ) {
-      return res.json({
-        error: "Username, password or email fields cannot be empty",
-      });
+      throw new Error("Username or password fields cannot be empty.");
+    }
+
+    if (user.password !== user.confirmPassword) {
+      throw new Error("Password fields do not match.");
     }
 
     const isExistingUser = await db
@@ -78,7 +80,7 @@ exports.postRegister = async (req, res) => {
       .first();
 
     if (isExistingUser) {
-      return res.json({ error: "User already exists" });
+      throw new Error("User already exists.");
     }
 
     const saltRounds = 10;
@@ -86,7 +88,12 @@ exports.postRegister = async (req, res) => {
 
     user.password = hashedPassword;
 
-    const insertedUser = await db("users").insert(user).returning("*").first();
+    const insertedUser = await db("users")
+      .insert({
+        username: user.username,
+        password: hashedPassword,
+      })
+      .returning("*");
 
     if (insertedUser) {
       return res.json({ success: "Success" });

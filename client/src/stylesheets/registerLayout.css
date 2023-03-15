@@ -1,9 +1,10 @@
-.wrapper {
+.register-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 50vh;
+  margin-top: 40px;
 }
 
 .register-form {

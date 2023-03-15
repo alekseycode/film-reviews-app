@@ -28,7 +28,7 @@ export default function LoginLayout() {
   };
 
   return (
-    <div className="wrapper">
+    <div className="log-in-wrapper">
       {error && <div className="error">{error}</div>}
       <form className="log-in-form" onSubmit={handleSubmit}>
         <div className="username-div">
