@@ -80,7 +80,7 @@ exports.postRegister = async (req, res) => {
     }
 
     if (!emailRegex.test(email)) {
-      throw new Error("Invalid email address.");
+      throw new Error("Please enter a valid email address.");
     }
 
     const isExistingUser = await db
