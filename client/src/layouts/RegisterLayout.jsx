@@ -12,27 +12,22 @@ const RegisterLayout = () => {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
-  const { username, password, confirmPassword } = form;
+  const { username, password, confirmPassword, email } = form;
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post(`${API_URL}/auth/register`, form);
-      navigate("/login", {
-        replace: true,
-      });
+      navigate("/login", { replace: true });
     } catch (e) {
       setError(e.response.data.error);
       console.log(e);
     }
-    console.log(form);
   };
 
-  const updateForm = (e) => {
+  const updateForm = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(form);
-  };
 
   return (
     <div className="register-wrapper">
@@ -65,6 +60,16 @@ const RegisterLayout = () => {
             name="confirmPassword"
             id="confirm-password"
             value={confirmPassword}
+            onChange={updateForm}
+          />
+        </div>
+        <div className="email-div">
+          <label htmlFor="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            value={email}
             onChange={updateForm}
           />
         </div>

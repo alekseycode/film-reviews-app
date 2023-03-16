@@ -1,5 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../constants";
 import "../stylesheets/forgotPassAuth.css";
 
 const ForgotPassAuthLayout = () => {
@@ -10,13 +12,20 @@ const ForgotPassAuthLayout = () => {
   const { email } = form;
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    console.log("handleSubmit");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(`${API_URL}/auth/forgotPass`, form);
+      navigate("/resetPass", { replace: true });
+    } catch (e) {
+      setError(e.response.data.error);
+      console.log(e);
+    }
+    console.log(form);
   };
 
-  const updateForm = () => {
-    console.log("updateForm");
-  };
+  const updateForm = (e) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   return (
     <div className="password-auth-wrapper">

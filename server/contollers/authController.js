@@ -59,18 +59,24 @@ exports.logOut = async (req, res) => {
 
 exports.postRegister = async (req, res) => {
   const user = req.body;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   try {
     if (
       !user?.username?.length ||
       !user?.password?.length ||
-      !user?.confirmPassword?.length
+      !user?.confirmPassword?.length ||
+      !user?.email?.length
     ) {
-      throw new Error("Username or password fields cannot be empty.");
+      throw new Error("Username, password or email fields cannot be empty.");
     }
 
     if (user.password !== user.confirmPassword) {
       throw new Error("Password fields do not match.");
+    }
+
+    if (!emailRegex.test(user.email)) {
+      throw new Error("Invalid email address.");
     }
 
     const isExistingUser = await db
@@ -92,6 +98,7 @@ exports.postRegister = async (req, res) => {
       .insert({
         username: user.username,
         password: hashedPassword,
+        email: user.email,
       })
       .returning("*");
 
@@ -105,12 +112,20 @@ exports.postRegister = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
-
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   try {
+    if (!emailRegex.test(email)) {
+      throw new Error("Invalid email address.");
+    }
+
+    if (!email.includes("@") || !email.includes(".com") || email.length < 6) {
+      throw new Error("Invalid email address.");
+    }
+
     const user = await db("users").where("email", email).first();
 
     if (!user) {
-      throw new Error("Invalid email address");
+      throw new Error("No user associated with this email");
     }
 
     return res.json({ success: "success" });
@@ -120,7 +135,7 @@ exports.forgotPassword = async (req, res) => {
 };
 
 exports.newPassword = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, confirmPassword } = req.body;
   try {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
