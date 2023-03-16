@@ -168,8 +168,3 @@ exports.newPassword = async (req, res) => {
     return res.status(400).json({ error: e.message });
   }
 };
-
-exports.getSession = async (req, res) => {
-  // console.log('getSession: ', req.session);
-  return res.send(req.session.cookie);
-};
