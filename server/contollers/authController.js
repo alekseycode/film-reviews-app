@@ -75,14 +75,6 @@ exports.postRegister = async (req, res) => {
       throw new Error("Username, password or email fields cannot be empty.");
     }
 
-    if (password !== confirmPassword) {
-      throw new Error("Password fields do not match.");
-    }
-
-    if (!emailRegex.test(email)) {
-      throw new Error("Please enter a valid email address.");
-    }
-
     const isExistingUser = await db
       .select("username")
       .from("users")
@@ -91,6 +83,14 @@ exports.postRegister = async (req, res) => {
 
     if (isExistingUser) {
       throw new Error("User already exists.");
+    }
+
+    if (password !== confirmPassword) {
+      throw new Error("Password fields do not match.");
+    }
+
+    if (!emailRegex.test(email)) {
+      throw new Error("Please enter a valid email address.");
     }
 
     const saltRounds = 10;
