@@ -62,31 +62,31 @@ exports.logOut = async (req, res) => {
 };
 
 exports.postRegister = async (req, res) => {
-  const user = req.body;
+  const { username, password, confirmPassword, email } = req.body;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   try {
     if (
-      !user?.username?.length ||
-      !user?.password?.length ||
-      !user?.confirmPassword?.length ||
-      !user?.email?.length
+      !username?.length ||
+      !password?.length ||
+      !confirmPassword?.length ||
+      !email?.length
     ) {
       throw new Error("Username, password or email fields cannot be empty.");
     }
 
-    if (user.password !== user.confirmPassword) {
+    if (password !== confirmPassword) {
       throw new Error("Password fields do not match.");
     }
 
-    if (!emailRegex.test(user.email)) {
+    if (!emailRegex.test(email)) {
       throw new Error("Invalid email address.");
     }
 
     const isExistingUser = await db
       .select("username")
       .from("users")
-      .where("username", user.username)
+      .where("username", username)
       .first();
 
     if (isExistingUser) {
@@ -94,15 +94,13 @@ exports.postRegister = async (req, res) => {
     }
 
     const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-
-    user.password = hashedPassword;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     const insertedUser = await db("users")
       .insert({
-        username: user.username,
+        username,
         password: hashedPassword,
-        email: user.email,
+        email,
       })
       .returning("*");
 
