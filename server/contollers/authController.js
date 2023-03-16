@@ -116,11 +116,10 @@ exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   try {
-    if (!emailRegex.test(email)) {
-      throw new Error("Invalid email address.");
+    if (!email?.length) {
+      throw new Error("Field cannot be empty.");
     }
-
-    if (!email.includes("@") || !email.includes(".com") || email.length < 6) {
+    if (!emailRegex.test(email)) {
       throw new Error("Invalid email address.");
     }
 
