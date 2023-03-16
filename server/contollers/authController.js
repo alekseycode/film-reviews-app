@@ -20,7 +20,11 @@ exports.postLogin = async (req, res) => {
       throw new Error("Incorrect username or password.");
     }
 
-    await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      throw new Error("Incorrect username or password.");
+    }
 
     //give the user a session
 
@@ -137,6 +141,24 @@ exports.forgotPassword = async (req, res) => {
 exports.newPassword = async (req, res) => {
   const { username, password, confirmPassword } = req.body;
   try {
+    if (!username?.length || !password?.length || !confirmPassword?.length) {
+      throw new Error("Username or password fields cannot be empty.");
+    }
+
+    const isExistingUser = await db
+      .select("username")
+      .from("users")
+      .where("username", username)
+      .first();
+
+    if (!isExistingUser) {
+      throw new Error("No user associated with that username.");
+    }
+
+    if (password !== confirmPassword) {
+      throw new Error("Password fields do not match.");
+    }
+
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
