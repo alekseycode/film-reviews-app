@@ -38,7 +38,7 @@ exports.postLogin = async (req, res) => {
 
     res.cookie("sessionId", session.id, {
       signed: true,
-      maxAge: THIRTY_SECONDS * 10,
+      maxAge: THIRTY_SECONDS * 200,
     });
 
     return res.json({ username, id: user.id });
