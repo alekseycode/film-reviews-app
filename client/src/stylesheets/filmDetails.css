@@ -6,7 +6,7 @@
 .review {
   padding: 10px;
   border: 1px solid #ccc;
-  margin: 20px 40px 0 40px;
+  margin: 20px 240px 0 240px;
   font-size: 18px;
   line-height: 1.5;
   font-family: "Helvetica Neue", sans-serif;
@@ -17,4 +17,46 @@
   margin-left: 20px;
   margin-right: 10px;
   color: #0077cc;
+}
+
+.add-review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.review-label {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.review-input {
+  width: 60%;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+
+.submit-review-btn {
+  background-color: #008cba;
+  color: #fff;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005b8a;
+}
+
+.disclaimer {
+  margin-top: 80px;
+  text-align: center;
 }

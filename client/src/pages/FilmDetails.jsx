@@ -2,22 +2,21 @@ import "../stylesheets/filmDetails.css";
 import { useLoaderData } from "react-router-dom";
 import { API_URL } from "../constants";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 const FilmDetails = () => {
   const { filmPayload, reviewsPayload } = useLoaderData();
   const [form, setForm] = useState({ review: "" });
   const { review } = form;
+  const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
   };
 
-  const updateForm = (e) => {
-    setForm({ [e.target.name]: e.target.value });
-    console.log(form);
-  };
+  const updateForm = (e) => setForm({ [e.target.name]: e.target.value });
 
   return (
     <div className="film-details">
@@ -28,17 +27,26 @@ const FilmDetails = () => {
         </div>
       ))}
 
-      <form className="add-review" onSubmit={handleSubmit}>
-        <label htmlFor="review">Add your review</label>
-        <input
-          type="textarea"
-          id="review"
-          name="review"
-          value={review}
-          onChange={updateForm}
-        />
-        <button type="submit">Add</button>
-      </form>
+      {user.userId ? (
+        <form className="add-review" onSubmit={handleSubmit}>
+          <label className="review-label" htmlFor="review">
+            Add your review
+          </label>
+          <input
+            className="review-input"
+            type="textarea"
+            id="review"
+            name="review"
+            value={review}
+            onChange={updateForm}
+          />
+          <button className="submit-review-btn" type="submit">
+            Add
+          </button>
+        </form>
+      ) : (
+        <p className="disclaimer">Log in to add a review</p>
+      )}
     </div>
   );
 };
