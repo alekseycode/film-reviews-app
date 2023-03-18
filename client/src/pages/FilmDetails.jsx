@@ -1,5 +1,5 @@
 import "../stylesheets/filmDetails.css";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { API_URL } from "../constants";
 import axios from "axios";
 import { useContext, useState } from "react";
@@ -58,7 +58,9 @@ const FilmDetails = () => {
           </button>
         </form>
       ) : (
-        <p className="disclaimer">Log in to add a review</p>
+        <p className="disclaimer">
+          <Link to="/login">Log in</Link> to add a review
+        </p>
       )}
     </div>
   );
