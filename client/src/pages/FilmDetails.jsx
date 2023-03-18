@@ -2,9 +2,22 @@ import "../stylesheets/filmDetails.css";
 import { useLoaderData } from "react-router-dom";
 import { API_URL } from "../constants";
 import axios from "axios";
+import { useState } from "react";
 
 const FilmDetails = () => {
   const { filmPayload, reviewsPayload } = useLoaderData();
+  const [form, setForm] = useState({ review: "" });
+  const { review } = form;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+  };
+
+  const updateForm = (e) => {
+    setForm({ [e.target.name]: e.target.value });
+    console.log(form);
+  };
 
   return (
     <div className="film-details">
@@ -14,6 +27,18 @@ const FilmDetails = () => {
           <span className="username">{review.username}:</span> ’{review.review}’
         </div>
       ))}
+
+      <form className="add-review" onSubmit={handleSubmit}>
+        <label htmlFor="review">Add your review</label>
+        <input
+          type="textarea"
+          id="review"
+          name="review"
+          value={review}
+          onChange={updateForm}
+        />
+        <button type="submit">Add</button>
+      </form>
     </div>
   );
 };
