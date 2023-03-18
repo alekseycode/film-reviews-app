@@ -20,10 +20,12 @@ exports.getReviewsByFilmId = async (req, res) => {
 };
 
 exports.postReview = async (req, res) => {
-  const { review } = req.body;
+  const { review, user_id, film_id } = req.body;
 
   await db("reviews").insert({
-    review: review,
+    review,
+    user_id,
+    film_id,
     created_at: db.raw("now()"),
   });
 

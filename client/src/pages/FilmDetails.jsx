@@ -1,5 +1,5 @@
 import "../stylesheets/filmDetails.css";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { API_URL } from "../constants";
 import axios from "axios";
 import { useContext, useState } from "react";
@@ -10,10 +10,23 @@ const FilmDetails = () => {
   const [form, setForm] = useState({ review: "" });
   const { review } = form;
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+    try {
+      const submissionData = {
+        review,
+        user_id: user.userId,
+        film_id: filmPayload.payload[0].id,
+      };
+
+      await axios.post(`${API_URL}/api/addReview`, submissionData);
+      setForm({ review: "" });
+      navigate(`/films/${filmPayload.payload[0].id}`);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const updateForm = (e) => setForm({ [e.target.name]: e.target.value });
