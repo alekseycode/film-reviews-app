@@ -4,7 +4,8 @@ nav {
   display: flex;
   justify-content: space-evenly;
   background-color: var(--background-color);
-  padding-bottom: 20px;
+  padding-bottom: 30px;
+  padding-top: 20px;
 }
 
 nav a,
