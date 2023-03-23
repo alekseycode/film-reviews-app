@@ -4,7 +4,7 @@ import "../stylesheets/home.css";
 export const Home = () => {
   return (
     <div className="home">
-      <section class="main-image-container"></section>
+      <section className="main-image-container"></section>
       <h2 className="featured-content-heading">Browse the latest reviews</h2>
       <section className="latest-reviews-section">
         <div className="grid-wrapper">
