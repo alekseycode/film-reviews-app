@@ -6,7 +6,7 @@ require("dotenv").config();
 const app = express();
 
 const corsOptions = {
-  origin: process.env.ORIGIN_DOMAIN || "*",
+  origin: process.env.ORIGIN_DOMAIN,
   optionSuccessStatus: 200,
   credentials: true,
 };
