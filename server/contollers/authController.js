@@ -168,3 +168,21 @@ exports.newPassword = async (req, res) => {
     return res.status(400).json({ error: e.message });
   }
 };
+
+exports.getSession = async (req, res) => {
+  const { userId } = req.body;
+  try {
+    if (!userId) {
+      throw new Error("No current user logged in");
+    }
+    const getSessionById = await db("sessions").where({ user_id: userId });
+
+    if (!getSessionById?.length) {
+      throw new Error("No session found");
+    }
+
+    return res.status(200).json({ session: getSessionById });
+  } catch (e) {
+    return res.status(400).json({ error: e.message });
+  }
+};
