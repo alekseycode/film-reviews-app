@@ -38,12 +38,13 @@ exports.postLogin = async (req, res) => {
     });
 
     res.cookie("sessionId", session.id, {
-      // httpOnly: true,
+      httpOnly: true,
+      sameSite: "none",
       signed: true,
       maxAge: THIRTY_SECONDS * 240,
       // domain: process.env.COOKIE_DOMAIN,
       path: "/",
-      secure: true,
+      Secure: true,
     });
 
     return res.json({ username, id: user.id, sessionId: session.id });
