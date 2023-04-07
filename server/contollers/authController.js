@@ -37,11 +37,15 @@ exports.postLogin = async (req, res) => {
     });
 
     res.cookie("sessionId", session.id, {
+      httpOnly: true,
       signed: true,
-      maxAge: THIRTY_SECONDS * 200,
+      maxAge: THIRTY_SECONDS * 240,
+      domain: process.env.COOKIE_DOMAIN,
+      path: "/",
+      secure: true,
     });
 
-    return res.json({ username, id: user.id });
+    return res.json({ username, id: user.id, sessionId: session.id });
   } catch (e) {
     return res.status(400).json({ error: e.message });
   }
@@ -170,12 +174,16 @@ exports.newPassword = async (req, res) => {
 };
 
 exports.getSession = async (req, res) => {
-  const { userId } = req.body;
+  const { sessionId } = req.signedCookies;
+
   try {
-    if (!userId) {
+    if (!sessionId?.length) {
       throw new Error("No current user logged in");
     }
-    const getSessionById = await db("sessions").where({ user_id: userId });
+    const getSessionById = await db("sessions")
+      .join("users", "sessions.user_id", "=", "users.id")
+      .select("sessions.*", "users.username")
+      .where("sessions.id", sessionId);
 
     if (!getSessionById?.length) {
       throw new Error("No session found");
@@ -183,6 +191,6 @@ exports.getSession = async (req, res) => {
 
     return res.status(200).json({ session: getSessionById });
   } catch (e) {
-    return res.status(400).json({ error: e.message });
+    return res.json({ error: e.message });
   }
 };
