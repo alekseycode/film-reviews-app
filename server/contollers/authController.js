@@ -1,6 +1,7 @@
 const { db } = require("../db/weviewsDB");
 const bcrypt = require("bcrypt");
 const THIRTY_SECONDS = 30000;
+const TWO_HOURS = 7200000;
 
 exports.postLogin = async (req, res) => {
   const { username, password } = req.body;
@@ -29,7 +30,7 @@ exports.postLogin = async (req, res) => {
     //give the user a session
 
     const utcMilliseconds = new Date().getTime();
-    const expiration = new Date(utcMilliseconds + THIRTY_SECONDS);
+    const expiration = new Date(utcMilliseconds + TWO_HOURS);
 
     const [session] = await db("sessions").returning("id").insert({
       user_id: user.id,
