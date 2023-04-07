@@ -175,6 +175,7 @@ exports.newPassword = async (req, res) => {
 
 exports.getSession = async (req, res) => {
   const { sessionId } = req.signedCookies;
+  console.log(req);
   try {
     if (!sessionId?.length) {
       return res.status(200).json({ session: undefined });
