@@ -37,7 +37,7 @@ exports.postLogin = async (req, res) => {
     });
 
     res.cookie("sessionId", session.id, {
-      httpOnly: true,
+      // httpOnly: true,
       signed: true,
       maxAge: THIRTY_SECONDS * 240,
       // domain: process.env.COOKIE_DOMAIN,
