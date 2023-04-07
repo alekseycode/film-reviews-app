@@ -40,7 +40,7 @@ exports.postLogin = async (req, res) => {
       httpOnly: true,
       signed: true,
       maxAge: THIRTY_SECONDS * 240,
-      domain: process.env.COOKIE_DOMAIN,
+      // domain: process.env.COOKIE_DOMAIN,
       path: "/",
       secure: true,
     });
