@@ -42,9 +42,9 @@ exports.postLogin = async (req, res) => {
       sameSite: "none",
       signed: true,
       maxAge: THIRTY_SECONDS * 240,
-      // domain: process.env.COOKIE_DOMAIN,
+      domain: process.env.COOKIE_DOMAIN,
       path: "/",
-      Secure: true,
+      secure: true,
     });
 
     return res.json({ username, id: user.id, sessionId: session.id });
