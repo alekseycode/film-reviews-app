@@ -12,6 +12,11 @@ import RootLayout from "./layouts/RootLayout";
 import FilmDetails, { filmDetailsAndReviewsLoader } from "./pages/FilmDetails";
 import { Home } from "./pages/Home";
 
+if (process.env.NODE_ENV === "local" && window.location.protocol !== "https:") {
+  window.location.href =
+    "https://" + window.location.host + window.location.pathname;
+}
+
 const router = createBrowserRouter([
   {
     path: "/",

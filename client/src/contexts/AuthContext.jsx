@@ -16,12 +16,15 @@ const AuthContextProvider = (props) => {
           withCredentials: true,
         });
         setUserLoading(false);
-        const sessionData = response.data.session[0];
-        setUser({
-          username: sessionData.username,
-          userId: sessionData.user_id,
-          sessionId: sessionData.id,
-        });
+        const sessionData =
+          response?.data?.session?.length && response?.data?.session[0];
+        if (sessionData) {
+          setUser({
+            username: sessionData.username,
+            userId: sessionData.user_id,
+            sessionId: sessionData.id,
+          });
+        }
       } catch (error) {
         console.error(error);
         setUserLoading(false);

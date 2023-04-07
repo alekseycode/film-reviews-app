@@ -175,20 +175,17 @@ exports.newPassword = async (req, res) => {
 
 exports.getSession = async (req, res) => {
   const { sessionId } = req.signedCookies;
-
   try {
     if (!sessionId?.length) {
-      throw new Error("No current user logged in");
+      return res.status(200).json({ session: undefined });
     }
     const getSessionById = await db("sessions")
       .join("users", "sessions.user_id", "=", "users.id")
       .select("sessions.*", "users.username")
       .where("sessions.id", sessionId);
-
     if (!getSessionById?.length) {
       throw new Error("No session found");
     }
-
     return res.status(200).json({ session: getSessionById });
   } catch (e) {
     return res.json({ error: e.message });
