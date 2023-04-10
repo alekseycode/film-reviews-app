@@ -5,7 +5,7 @@ This is a film review website that is built using React on the client-side and N
 ## Installation
 
 1. Clone the repository to your local machine using `git clone <repository-url>`.
-2. Navigate to the server folder of the project using the command line.
+2. Navigate to the server folder of the project by running `cd server` using the command line.
 3. Install the required dependencies for the server-side by running `npm install` in the root folder.
 4. Navigate back to the root folder by running `cd ..` in the command line.
 5. Navigate to the client folder by running `cd client` in the root folder.
