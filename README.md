@@ -58,11 +58,11 @@ Replace `<COOKIE_DOMAIN>` with the root of the domain that is shared by the clie
 - Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine that allows server-side JavaScript execution.
 - Express.js: A fast and minimalist web application framework for Node.js that simplifies the creation of APIs.
 - SQL: A powerful relational database management system for storing and retrieving data.
-- MySQL: An open-source relational database management system.
+- ElephantSQL: A cloud-based PostgreSQL database service for easy and scalable database hosting.
+- TablePlus: A user-friendly database management tool for developers.
 - Axios: A popular HTTP client library for making API requests.
 - bcrypt: A library for hashing and salting passwords to enhance security.
-- JWT: JSON Web Tokens for authentication and authorization.
-- Sequelize: A powerful ORM (Object Relational Mapper) for Node.js that simplifies database interactions.
+- Knex.js: A powerful ORM (Object Relational Mapper) for Node.js that simplifies database interactions.
 - Bootstrap: A popular CSS framework for building responsive and modern web applications.
 
 ## License
