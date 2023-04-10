@@ -40,7 +40,7 @@ Replace `<COOKIE_DOMAIN>` with the root of the domain that is shared by the clie
 ## Database Setup
 
 1. Create a MySQL database with the name `<your-database-name>` as defined in the `.env` file.
-2. Run the SQL script provided in the `db.sql` file located in the root folder of the project to create the necessary tables in the database.
+2. Run the SQL script provided in the `db.sql` file located in the server folder of the project to create the necessary tables in the database.
 
 ## Usage
 
