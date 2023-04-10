@@ -37,9 +37,16 @@ Replace `<ORIGIN_DOMAIN>` with the domain of your client.
 
 Replace `<COOKIE_DOMAIN>` with the root of the domain that is shared by the client and server preceding with a `.` (ex: `.netlify.app`).
 
+3. Create a `.env` file in the client folder of the project.
+4. Define the following environment variables in the `.env` file:
+
+REACT_APP_WEVIEWS_SERVER_URL=`<your-server-url>`  
+HTTPS=true  
+NODE_ENV='production'
+
 ## Database Setup
 
-1. Create a MySQL database with the name `<your-database-name>` as defined in the `.env` file.
+1. Create an SQL database with the name `<your-database-name>` as defined in the `.env` file.
 2. Run the SQL script provided in the `db.sql` file located in the server folder of the project to create the necessary tables in the database.
 
 ## Usage
