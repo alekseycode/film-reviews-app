@@ -17,14 +17,14 @@ This is a film review website that is built using React on the client-side and N
 1. Create a `.env` file in the server folder of the project.
 2. Define the following environment variables in the `.env` file:
 
-API_PORT=`<your-API-port>`
-DB_HOST=`<your-database-host>`
-DB_USER=`<your-database-username>`
-DB_PASSWORD=`<your-database-password>`
-DB_NAME=`<your-database-name>`
-DB_PORT=`<your-DB-port>`
-COOKIE_SECRET=`<your-cookie-secret>`
-ORIGIN_DOMAIN=`<your-origin-domain>`
+API_PORT=`<your-API-port>`  
+DB_HOST=`<your-database-host>`  
+DB_USER=`<your-database-username>`  
+DB_PASSWORD=`<your-database-password>`  
+DB_NAME=`<your-database-name>`  
+DB_PORT=`<your-DB-port>`  
+COOKIE_SECRET=`<your-cookie-secret>`  
+ORIGIN_DOMAIN=`<your-origin-domain>`  
 COOKIE_DOMAIN=`<your-cookie-domain>`
 
 Replace `<API_PORT>` with your own port for the API.
