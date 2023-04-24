@@ -82,6 +82,19 @@
   margin: 2rem auto;
 }
 
+footer {
+  background-color: black;
+}
+
+footer p {
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+}
+
 /* --------------------------------------------------- */
 /* ----------------- DESKTOP CONTENT  -----------------*/
 /* --------------------------------------------------- */
