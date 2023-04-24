@@ -14,9 +14,9 @@ export const Home = () => {
               <div className="image-container black-adam"></div>
             </Link>
             <p>
-              ’’ It’s distinguished itself just enough to satiate action film
-              fans, entertain future streaming audiences and warrant further
-              merging into the DC universe. ’’
+              <strong>’’</strong> It’s distinguished itself just enough to
+              satiate action film fans, entertain future streaming audiences and
+              warrant further merging into the DC universe. <strong>’’</strong>
             </p>
             <Link to="/films/1">Read More . . .</Link>
           </div>
@@ -27,9 +27,9 @@ export const Home = () => {
               <div className="image-container black-widow"></div>
             </Link>
             <p>
-              ’’ The mostly self-contained story packs a surprising amount of
-              heart and finally gives this long-running MCU character a proper
-              send off. ’’
+              <strong>’’</strong> The mostly self-contained story packs a
+              surprising amount of heart and finally gives this long-running MCU
+              character a proper send off. <strong>’’</strong>
             </p>
             <Link to="/films/2">Read More . . .</Link>
           </div>
@@ -40,9 +40,9 @@ export const Home = () => {
               <div className="image-container man-of-steel"></div>
             </Link>
             <p>
-              ’’ Zack Snyder's Man of Steel is a gritty and realistic take on
-              one of the most iconic superheroes ever. It's visually astonishing
-              and action-packed. ’’
+              <strong>’’</strong> Zack Snyder's Man of Steel is a gritty and
+              realistic take on one of the most iconic superheroes ever. It's
+              visually astonishing and action-packed. <strong>’’</strong>
             </p>
             <Link to="/films/4">Read More . . .</Link>
           </div>
@@ -53,9 +53,9 @@ export const Home = () => {
               <div className="image-container captain-america"></div>
             </Link>
             <p>
-              ’’A whizz-bang, retro-futuristic adventure offers an exhilarating
-              thrill ride that perfectly captures the enduring optimism of the
-              1940s. ’’
+              <strong>’’</strong> A whizz-bang, retro-futuristic adventure
+              offers an exhilarating thrill ride that perfectly captures the
+              enduring optimism of the 1940s. <strong>’’</strong>
             </p>
             <Link to="/films/5">Read More . . .</Link>
           </div>
