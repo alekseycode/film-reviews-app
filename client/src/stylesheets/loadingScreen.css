@@ -1,0 +1,26 @@
+.loading-container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-color: #fff;
+  margin-top: 150px;
+}
+
+.loading {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  border: 8px dashed #4a4a4a;
+  border-radius: 50%;
+  animation: loading 2.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
