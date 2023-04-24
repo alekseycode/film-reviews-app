@@ -1,9 +1,11 @@
-@import 'variables.css';
+@import "variables.css";
 
 .title {
-    padding: 40px;
-    font-size: 30px;
-    text-align: center;
-    color: var(--title-color);
-    background-color: var(--background-color);
+  padding: 40px;
+  font-size: 30px;
+  text-align: center;
+  color: var(--title-color);
+  background-color: var(--background-color);
+  font-family: "Anton", sans-serif;
+  font-size: 3rem;
 }

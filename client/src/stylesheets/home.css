@@ -1,6 +1,8 @@
 .featured-content-heading {
   text-align: center;
   font-family: "Titillium Web", sans-serif;
+  font-size: 2rem;
+  font-weight: lighter;
 }
 
 .grid-wrapper {
@@ -10,8 +12,6 @@
 }
 
 .main-image-container {
-  /* width: 100%;
-    height: auto; */
   width: 100vw;
   height: 70vh;
   background-image: url(../../public/images/movie-posters-wallpaper-crop.jpg);
@@ -27,12 +27,13 @@
 
 .featured-content {
   margin-bottom: 4rem;
-  /* border: 1px solid black; */
   padding: 5% 0;
 }
 
 .featured-content h2 {
   font-family: "Anton", sans-serif;
+  font-size: 2rem;
+  font-weight: lighter;
 }
 
 .featured-content p {
@@ -80,6 +81,10 @@
 .image-container {
   margin: 2rem auto;
 }
+
+/* --------------------------------------------------- */
+/* ----------------- DESKTOP CONTENT  -----------------*/
+/* --------------------------------------------------- */
 
 @media (min-width: 501px) {
   .grid-wrapper {
