@@ -12,6 +12,7 @@ const FilmDetails = () => {
   const [reviews, setReviews] = useState([]);
   const [form, setForm] = useState({ review: "" });
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(0);
   const { review } = form;
   const { user } = useContext(AuthContext);
 
@@ -26,6 +27,7 @@ const FilmDetails = () => {
 
       await axios.post(`${API_URL}/api/addReview`, submissionData);
       setForm({ review: "" });
+      setIsSubmitting((count) => count + 1);
     } catch (e) {
       console.log(e);
     }
@@ -51,7 +53,7 @@ const FilmDetails = () => {
       }
     };
     fetchData();
-  }, [id, reviews]);
+  }, [id, isSubmitting]);
 
   return (
     <div className="film-details">

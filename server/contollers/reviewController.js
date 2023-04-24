@@ -20,14 +20,22 @@ exports.getReviewsByFilmId = async (req, res) => {
 };
 
 exports.postReview = async (req, res) => {
-  const { review, user_id, film_id } = req.body;
+  try {
+    const { review, user_id, film_id } = req.body;
 
-  await db("reviews").insert({
-    review,
-    user_id,
-    film_id,
-    created_at: db.raw("now()"),
-  });
+    if (!review?.length) {
+      throw new Error("Review field cannot be empty");
+    }
 
-  res.json({ message: "Success" });
+    await db("reviews").insert({
+      review,
+      user_id,
+      film_id,
+      created_at: db.raw("now()"),
+    });
+
+    res.json({ message: "Success" });
+  } catch (e) {
+    return res.status(400).json({ error: e.message });
+  }
 };
