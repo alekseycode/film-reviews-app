@@ -61,9 +61,6 @@ export const Home = () => {
           </div>
         </div>
       </section>
-      <footer>
-        <p>© Alekey Chernyakhovskiy | All rights reserved</p>
-      </footer>
     </div>
   );
 };
