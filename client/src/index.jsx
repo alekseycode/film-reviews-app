@@ -9,7 +9,7 @@ import LoginLayout from "./layouts/LoginLayout";
 import RegisterLayout from "./layouts/RegisterLayout";
 import ResetPassLayout from "./layouts/ResetPassLayout";
 import RootLayout from "./layouts/RootLayout";
-import FilmDetails, { filmDetailsAndReviewsLoader } from "./pages/FilmDetails";
+import FilmDetails from "./pages/FilmDetails";
 import { Home } from "./pages/Home";
 
 if (process.env.NODE_ENV === "local" && window.location.protocol !== "https:") {
@@ -33,7 +33,6 @@ const router = createBrowserRouter([
       {
         path: "films/:id",
         element: <FilmDetails />,
-        loader: filmDetailsAndReviewsLoader,
       },
       {
         path: "login",

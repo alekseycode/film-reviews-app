@@ -1,16 +1,40 @@
 import "../stylesheets/filmDetails.css";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { API_URL } from "../constants";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
 const FilmDetails = () => {
-  const { filmPayload, reviewsPayload } = useLoaderData();
+  const { id } = useParams();
+  const [filmPayload, setFilmPayload] = useState(null);
+  const [reviewsPayload, setReviewsPayload] = useState(null);
   const [form, setForm] = useState({ review: "" });
   const { review } = form;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [filmRes, reviewsRes] = await axios.all([
+          axios.get(`${API_URL}/api/films/${id}`),
+          axios.get(`${API_URL}/api/usersReviews/${id}`),
+        ]);
+
+        if (filmRes.status !== 200 || reviewsRes.status !== 200) {
+          throw new Error("Could not load film details and reviews");
+        }
+
+        setFilmPayload(filmRes.data);
+        setReviewsPayload(reviewsRes.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +54,10 @@ const FilmDetails = () => {
   };
 
   const updateForm = (e) => setForm({ [e.target.name]: e.target.value });
+
+  if (!filmPayload || !reviewsPayload) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="film-details">
@@ -64,24 +92,6 @@ const FilmDetails = () => {
       )}
     </div>
   );
-};
-
-export const filmDetailsAndReviewsLoader = async ({ params }) => {
-  const { id } = params;
-
-  const [filmRes, reviewsRes] = await axios.all([
-    axios.get(`${API_URL}/api/films/${id}`),
-    axios.get(`${API_URL}/api/usersReviews/${id}`),
-  ]);
-
-  if (filmRes.status !== 200 || reviewsRes.status !== 200) {
-    throw new Error("Could not load film details and reviews");
-  }
-
-  return {
-    filmPayload: filmRes.data,
-    reviewsPayload: reviewsRes.data,
-  };
 };
 
 export default FilmDetails;

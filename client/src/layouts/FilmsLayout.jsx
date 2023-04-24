@@ -14,7 +14,7 @@ export const FilmsLayout = () => {
       .get(`${API_URL}/api/films`)
       .then(async (res) => {
         setFilmsData(res.data.payload);
-        setTimeout(() => setIsLoading(false), 15000);
+        setTimeout(() => setIsLoading(false), 1000);
       })
       .catch((e) => console.log(e));
   }, []);
