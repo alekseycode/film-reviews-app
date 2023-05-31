@@ -47,7 +47,7 @@ const FilmDetails = () => {
         }
         setFilm(filmRes.data.payload[0]);
         setReviews(reviewsRes.data.payload);
-        setTimeout(() => setIsLoading(false), 200);
+        setIsLoading(false);
       } catch (e) {
         console.log(e);
       }
